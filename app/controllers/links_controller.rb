@@ -21,7 +21,7 @@ class LinksController < ApplicationController
 
   # POST /links
   def create
-    @link = Link.new(link_params)
+    @link = Link.new(link_params.merge(user_id: current_user.id))
 
     if @link.save
       redirect_to @link, notice: 'Link was successfully created.'
