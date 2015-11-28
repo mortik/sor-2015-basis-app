@@ -1,5 +1,6 @@
 class LinksController < ApplicationController
   before_action :set_link, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy, :update]
 
   # GET /links
   def index
@@ -22,7 +23,7 @@ class LinksController < ApplicationController
 
   # POST /links
   def create
-    @link = Link.new(link_params)
+    @link = Link.new(link_params.merge(user_id: current_user.id))
 
     if @link.save
       redirect_to @link, notice: 'Link was successfully created.'

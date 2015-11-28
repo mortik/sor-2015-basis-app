@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+
 <% @link.comments.each do |comment| %>
       <tr>
         <td><%= comment.user_name%></td>
@@ -10,3 +11,4 @@
       </tr>
     <% end %>
 <p><%= link_to 'New Comment', new_link_comment_path(@link) %></p>
+
