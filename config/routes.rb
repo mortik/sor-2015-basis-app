@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :comments
-  resources :comments
+  resources :links
   resources :posts, only: [:index, :show]
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

@@ -66,5 +66,3 @@ group :development do
 
   gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 end
-
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
