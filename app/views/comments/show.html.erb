@@ -10,5 +10,10 @@
   <%= @comment.body %>
 </p>
 
+<p>
+  <strong>Link:</strong>
+  <%= @comment.url %>
+</p>
+
 <%= link_to 'Edit', edit_link_comment_path(@link, @comment) %> |
 <%= link_to 'Back', link_path(@link) %>

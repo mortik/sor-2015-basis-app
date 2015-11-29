@@ -1,20 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Ranking Links</h1>
+<h1>Top Links</h1>
 <div class="table-responsive">
   <table class="table table-hover">
     <tbody>
       <% @links.each do |link| %>
         <tr>
           <td style="padding: 5px;">
-
-            <%= link_to '', like_link_path(link), class:"glyphicon glyphicon-thumbs-up" %> <%= @likes[link.id] %> | 
-            <%= link_to link.title, link %>
-      
+            <%= link_to link.title, link %><br>
+            <div>
+              <%= link_to 'Kommentare', link %> | 
+              <%= link_to 'Edit', edit_link_path(link) %> | 
+              <%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+            <%= link_to '', like_link_path(link), class:"glyphicon glyphicon-thumbs-up" %> <%= @likes[link.id] %>
+            <% link.tags.each do |tag| %>
+            <%= link_to tag, '', class:"btn btn-xs btn-default" %>
+            <% end %>
          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
+</br>
 <%= link_to 'New Link', new_link_path %>

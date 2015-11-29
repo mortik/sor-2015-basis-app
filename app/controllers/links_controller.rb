@@ -27,6 +27,8 @@ class LinksController < ApplicationController
 
   # POST /links
   def create
+    tags = link_params['tags']
+    link_params['tags'] = tags.split(' ')
     @link = Link.new(link_params.merge(user_id: current_user.id))
 
     if @link.save
