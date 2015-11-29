@@ -30,7 +30,6 @@ class CommentsController < ApplicationController
   @comment.url = params[:comment][:url]
   @comment.link_id = params[:link_id]
   @link = @comment.link
-     debugger
     if @comment.save
       redirect_to @link, notice: 'Comment was successfully created.'
     else
