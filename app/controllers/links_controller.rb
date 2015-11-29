@@ -5,6 +5,7 @@ class LinksController < ApplicationController
   # GET /links
   def index
     if params[:tag]
+      @tag = params[:tag]
       @links = Link.all.select { |link| link.tags.include? params[:tag]}
     else
       @links = Link.all
