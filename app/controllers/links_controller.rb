@@ -40,7 +40,6 @@ class LinksController < ApplicationController
   def update
     tags = link_params['tags']
     link_params['tags'] = tags.split(' ')
-    debugger
     if @link.update(link_params)
       redirect_to @link, notice: 'Link was successfully updated.'
     else
