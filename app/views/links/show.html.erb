@@ -6,7 +6,7 @@
 	<%= link_to 'Back', links_path %>
   <div>
     <% @link.tags.each do |tag| %>
-      <%= link_to tag, '', class:"btn btn-xs btn-default" %>
+      <%= link_to tag, ('/links?tag=' + tag), class:"btn btn-xs btn-default" %>
     <% end %>
   </div>
 </div>
