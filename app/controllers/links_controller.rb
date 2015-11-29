@@ -38,6 +38,9 @@ class LinksController < ApplicationController
 
   # PATCH/PUT /links/1
   def update
+    tags = link_params['tags']
+    link_params['tags'] = tags.split(' ')
+    debugger
     if @link.update(link_params)
       redirect_to @link, notice: 'Link was successfully updated.'
     else
@@ -53,9 +56,12 @@ class LinksController < ApplicationController
 
   def like
     @like = Like.new({:user_id => current_user.id, :link_id => params[:id]})
-    @like.save
-
-    redirect_to links_url, notice: 'Geliked.'
+    if @like.save
+      redirect_to links_url, notice: 'Geliked'
+    else
+      redirect_to links_url, alert: "Bereits geliked"
+    end
+    
   end
 
   def rankings
