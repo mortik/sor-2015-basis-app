@@ -50,7 +50,7 @@ class Heroku < Thor
     end
 
     private def restart_app
-      p "Restart #{app} on #{stage}"
+      p "Restart #{app}"
       run_clean "heroku restart --app #{app}"
     end
 
