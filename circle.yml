@@ -1,0 +1,8 @@
+machine:
+  ruby:
+    version: 2.2.3
+deployment:
+  live:
+    branch: master
+    commands:
+      - bundle exec thor heroku:deploy
