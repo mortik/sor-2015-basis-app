@@ -14,6 +14,7 @@
               <%= link_to 'Edit', edit_link_path(link) %> | 
               <%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %>
             </div>
+            <%= link_to '', like_link_path(link), class:"glyphicon glyphicon-thumbs-up" %> <%= @likes[link.id] %>
           </td>
         </tr>
       <% end %>

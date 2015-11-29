@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
   resources :comments
-  resources :links
+  resources :links do
+    member do
+      get "like", to: "links#like"
+    end
+  end
   resources :posts, only: [:index, :show]
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
