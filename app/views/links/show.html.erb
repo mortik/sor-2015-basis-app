@@ -4,6 +4,11 @@
 	<%= link_to @link.title, @link.url %> |
 	<%= link_to 'Edit', edit_link_path(@link) %> |
 	<%= link_to 'Back', links_path %>
+  <div>
+    <% @link.tags.each do |tag| %>
+      <%= link_to tag, '', class:"btn btn-xs btn-default" %>
+    <% end %>
+  </div>
 </div>
 
 <% @link.comments.each do |comment| %>
