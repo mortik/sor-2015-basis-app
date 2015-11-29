@@ -9,7 +9,7 @@
       <% @links.each do |link| %>
         <tr>
           <td style="padding: 5px;">
-            <%= link_to link.title, "https://#{link.url}" %><br>
+            <%= link_to link.title, link.url %><br>
             <div>
               <%= link_to 'Kommentare', link %> | 
               <%= link_to 'Edit', edit_link_path(link) %> | 
@@ -17,7 +17,7 @@
             </div>
             <%= link_to '', like_link_path(link), class:"glyphicon glyphicon-thumbs-up" %> <%= @likes[link.id] %>
             <% link.tags.each do |tag| %>
-              <%= link_to tag, '', class:"btn btn-xs btn-default" %>
+              <%= link_to tag, ('/links?tag=' + tag), class:"btn btn-xs btn-default" %>
             <% end %>
           </td>
         </tr>
