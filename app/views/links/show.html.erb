@@ -1,6 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to @link.title, @link.url %> |
 
-<%= link_to 'Edit', edit_link_path(@link) %> |
-<%= link_to 'Back', links_path %>
+<% @link.comments.each do |comment| %>
+      <tr>
+        <td><%= comment.user_name%></td>
+        <td><%= comment.body.truncate(17, separator: ' ')%></td>
+        <td><%= link_to 'Show', link_comment_path(@link, comment) %></td>
+        <td><%= link_to 'Edit', edit_link_comment_path(@link, comment) %></td>
+        <td><%= link_to 'Destroy', link_comment_path(@link, comment), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+<p><%= link_to 'New Comment', new_link_comment_path(@link) %></p>
+

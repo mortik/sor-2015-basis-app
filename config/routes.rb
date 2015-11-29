@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :comments
   resources :links do
+    resources :comments
     member do
       get "like", to: "links#like"
     end

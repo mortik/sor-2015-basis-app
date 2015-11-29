@@ -9,23 +9,29 @@ class CommentsController < ApplicationController
 
   # GET /comments/1
   def show
+    @link = @comment.link
   end
 
   # GET /comments/new
   def new
     @comment = Comment.new
+    @link = Link.find(params[:link_id])
+    @comment.link_id = params[:link_id]
   end
 
   # GET /comments/1/edit
   def edit
+    @link = @comment.link
   end
 
   # POST /comments
   def create
-    @comment = Comment.new(comment_params.merge(user_id: current_user.id))
+    @comment = Comment.new(comment_params.merge(user_id: current_user.id, user_name: current_user.name ))
+    @comment.link_id = params[:link_id]
+    @link = @comment.link
 
     if @comment.save
-      redirect_to @comment, notice: 'Comment was successfully created.'
+      redirect_to @link, notice: 'Comment was successfully created.'
     else
       render :new
     end
@@ -33,8 +39,9 @@ class CommentsController < ApplicationController
 
   # PATCH/PUT /comments/1
   def update
+    @link = @comment.link
     if @comment.update(comment_params)
-      redirect_to @comment, notice: 'Comment was successfully updated.'
+      redirect_to @link, notice: 'Comment was successfully updated.'
     else
       render :edit
     end
@@ -43,7 +50,8 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   def destroy
     @comment.destroy
-    redirect_to comments_url, notice: 'Comment was successfully destroyed.'
+    @link = @comment.link
+    redirect_to @link, notice: 'Comment was successfully destroyed.'
   end
 
   private
