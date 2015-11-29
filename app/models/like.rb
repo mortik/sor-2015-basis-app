@@ -8,6 +8,6 @@ class Like < ActiveRecord::Base
 		unless Like.where(:user_id => user.id, :link_id => link.id).count == 0
 			errors.add(:user_id, "Link bereits geliked.")
 		end
-	end
+
 end
  

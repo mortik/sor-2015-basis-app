@@ -63,6 +63,17 @@ class LinksController < ApplicationController
     
   end
 
+  def rankings
+   @links = Link.all
+   @likes = Hash.new
+    Link.all.each do |link|
+      @likes[link.id] = Like.where(:link_id => link.id).count
+    end
+    @links = @links.sort_by do |link|
+      link.num_likes
+    end.reverse
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_link

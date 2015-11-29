@@ -9,7 +9,7 @@
       <% @links.each do |link| %>
         <tr>
           <td style="padding: 5px;">
-            <%= link_to link.title, link.url %><br>
+            <%= link_to link.title, "https://#{link.url}" %><br>
             <div>
               <%= link_to 'Kommentare', link %> | 
               <%= link_to 'Edit', edit_link_path(link) %> | 
