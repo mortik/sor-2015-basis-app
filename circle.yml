@@ -1,0 +1,5 @@
+deployment:
+  live:
+    branch: master
+    commands:
+      - bundle exec thor heroku:deploy

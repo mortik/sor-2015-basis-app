@@ -1,10 +1,14 @@
 class LinksController < ApplicationController
-  before_action :set_link, only: [:show, :edit, :update, :destroy]
+  before_action :set_link, only: [:show, :edit, :update, :destroy, :like]
   before_action :authenticate_user!, only: [:new, :edit, :destroy, :update]
 
   # GET /links
   def index
     @links = Link.all
+    @likes = Hash.new
+    Link.all.each do |link|
+      @likes[link.id] = Like.where(:link_id => link.id).count
+    end
   end
 
   # GET /links/1
@@ -45,6 +49,24 @@ class LinksController < ApplicationController
   def destroy
     @link.destroy
     redirect_to links_url, notice: 'Link was successfully destroyed.'
+  end
+
+  def like
+    @like = Like.new({:user_id => current_user.id, :link_id => params[:id]})
+    @like.save
+
+    redirect_to links_url, notice: 'Geliked.'
+  end
+
+  def rankings
+   @links = Link.all
+   @likes = Hash.new
+    Link.all.each do |link|
+      @likes[link.id] = Like.where(:link_id => link.id).count
+    end
+    @links = @links.sort_by do |link|
+      link.num_likes
+    end.reverse
   end
 
   private

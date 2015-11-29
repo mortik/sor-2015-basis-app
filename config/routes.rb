@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
- 
+
+  resources :comments
   resources :links do
     resources :comments
+    member do
+      get "like", to: "links#like"
+    end
   end
   resources :posts, only: [:index, :show]
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
-
+  get 'rankings' => 'links#rankings'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
