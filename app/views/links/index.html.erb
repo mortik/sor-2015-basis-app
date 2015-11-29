@@ -3,21 +3,28 @@
 
 <h1>New Links</h1>
 
+<%= link_to "Most popular", rankings_path %>
+
+  <% unless @tag.nil? %>
+    <div>Filter: <a class="btn btn-default btn-xs" disabled="true"><%= @tag %></a><%= link_to 'X', '/links', class:"btn btn-xs btn-warning"%></div><br>
+  <% end %>
+
+
 <div class="table-responsive">
   <table class="table table-hover">
     <tbody>
       <% @links.each do |link| %>
         <tr>
           <td style="padding: 5px;">
-            <%= link_to link.title, "https://#{link.url}" %><br>
+            <%= link_to link.title, link.url %><br>
             <div>
-              <%= link_to 'Kommentare', link %> | 
-              <%= link_to 'Edit', edit_link_path(link) %> | 
+              <%= link_to 'Kommentare', link %> |
+              <%= link_to 'Edit', edit_link_path(link) %> |
               <%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %>
             </div>
             <%= link_to '', like_link_path(link), class:"glyphicon glyphicon-thumbs-up" %> <%= @likes[link.id] %>
             <% link.tags.each do |tag| %>
-              <%= link_to tag, '', class:"btn btn-xs btn-default" %>
+              <%= link_to tag, ('/links?tag=' + tag), class:"btn btn-xs btn-default" %>
             <% end %>
           </td>
         </tr>
@@ -27,4 +34,4 @@
 </div>
 <br>
 
-<%= link_to 'New Link', new_link_path %>
+<p><%= link_to 'New Link', new_link_path, class:"btn btn-default" %></p>

@@ -4,7 +4,12 @@ class LinksController < ApplicationController
 
   # GET /links
   def index
-    @links = Link.all
+    if params[:tag]
+      @tag = params[:tag]
+      @links = Link.all.select { |link| link.tags.include? params[:tag]}
+    else
+      @links = Link.all
+    end
     @likes = Hash.new
     Link.all.each do |link|
       @likes[link.id] = Like.where(:link_id => link.id).count

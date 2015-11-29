@@ -6,21 +6,27 @@
 	<%= link_to 'Back', links_path %>
   <div>
     <% @link.tags.each do |tag| %>
-      <%= link_to tag, '', class:"btn btn-xs btn-default" %>
+      <%= link_to tag, ('/links?tag=' + tag), class:"btn btn-xs btn-default" %>
     <% end %>
   </div>
 </div>
 
 <% @link.comments.each do |comment| %>
+  <table class="commentsTable">
+    <tbody>
       <tr>
-        <td><%= comment.user_name%> wrote:</td> 
+        <td><%= comment.user_name%> wrote:</td>
         <td><%= comment.body.truncate(37, separator: ' ')%></td>
-        <div>
-              <%= link_to 'Show', link_comment_path(@link, comment)  %> | 
-              <%= link_to 'Edit', edit_link_comment_path(@link, comment) %> | 
-              <%= link_to 'Destroy', link_comment_path(@link, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
-            </div>
+        <td>
+          <div>
+            <%= link_to 'Show', link_comment_path(@link, comment)  %> |
+            <%= link_to 'Edit', edit_link_comment_path(@link, comment) %> |
+            <%= link_to 'Destroy', link_comment_path(@link, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        </td>
       </tr>
+    </tbody>
+  </table>
     <% end %></br>
-<p><%= link_to 'New Comment', new_link_comment_path(@link) %></p>
 
+<p><%= link_to 'New Comment', new_link_comment_path(@link) %></p>
