@@ -53,9 +53,12 @@ class LinksController < ApplicationController
 
   def like
     @like = Like.new({:user_id => current_user.id, :link_id => params[:id]})
-    @like.save
-
-    redirect_to links_url, notice: 'Geliked.'
+    if @like.save
+      redirect_to links_url, notice: 'Geliked'
+    else
+      redirect_to links_url, alert: "Bereits geliked"
+    end
+    
   end
 
   private
